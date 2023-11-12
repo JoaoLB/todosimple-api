@@ -1,16 +1,20 @@
 package com.joaoferreira.springboot.model;
 
-import java.util.List;
+//import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -43,7 +47,8 @@ public class user {
     @Size(groups = {createUser.class, updateUser.class}, min = 8, max = 60)
     private String password;
 
-    //private List<Task> tasks = new ArrayList<Task>();
+    @OneToMany(mappedBy = "user")
+    private List<task> tasks = new ArrayList<task>();
 
 
     public user() {
@@ -81,6 +86,16 @@ public class user {
         this.password = password;
     }
 
+
+    public List<task> getTasks() {
+        return this.tasks;
+    }
+
+    public void setTasks(List<task> tasks) {
+        this.tasks = tasks;
+    }
+
+
     @Override
     public boolean equals(Object obj){
         if (obj == this)
@@ -93,8 +108,8 @@ public class user {
         if (this.id == null)
             if (other.id != null)
                 return false;
-            else if (!this.id.equals other.id)
-                return false;
+            /**else if (!this.id.equals other.id)
+                return false;**/
         return Objects.equals(this.id, other.id) && Objects.equals(this.username, other.username)
             && Objects.equals(this.password, other.password);
     }
