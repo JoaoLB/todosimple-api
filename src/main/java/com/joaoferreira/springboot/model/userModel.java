@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name = user.TABLE_NAME)
-public class user {
+@Table(name = userModel.TABLE_NAME)
+public class userModel {
     public interface createUser { }
     public interface updateUser { }
 
@@ -48,14 +48,14 @@ public class user {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<task> tasks = new ArrayList<task>();
+    private List<taskModel> tasks = new ArrayList<taskModel>();
 
 
-    public user() {
+    public userModel() {
     }
 
 
-    public user(Long id, String username, String password) {
+    public userModel(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -87,11 +87,11 @@ public class user {
     }
 
 
-    public List<task> getTasks() {
+    public List<taskModel> getTasks() {
         return this.tasks;
     }
 
-    public void setTasks(List<task> tasks) {
+    public void setTasks(List<taskModel> tasks) {
         this.tasks = tasks;
     }
 
@@ -102,9 +102,9 @@ public class user {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof user))
+        if (!(obj instanceof userModel))
             return false;
-        user other = (user) obj;
+        userModel other = (userModel) obj;
         if (this.id == null)
             if (other.id != null)
                 return false;

@@ -15,8 +15,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = task.TABLE_NAME)
-public class task {
+@Table(name = taskModel.TABLE_NAME)
+public class taskModel {
     public static final String TABLE_NAME = "task";
 
     @Id
@@ -26,7 +26,7 @@ public class task {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
-    private user user;
+    private userModel user;
 
     @Column(name = "descripition", length = 255, nullable = false)
     @NotNull
@@ -35,7 +35,7 @@ public class task {
     private String description;
 
 
-    public task() {
+    public taskModel() {
     }
     
 
@@ -47,11 +47,11 @@ public class task {
         this.id = id;
     }
 
-    public user getUser() {
+    public userModel getUser() {
         return this.user;
     }
 
-    public void setUser(user user) {
+    public void setUser(userModel user) {
         this.user = user;
     }
 
@@ -69,9 +69,9 @@ public class task {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof task))
+        if (!(obj instanceof taskModel))
             return false;
-        task other = (task) obj;
+        taskModel other = (taskModel) obj;
         if (this.id == null)
             if (other.id != null)
                 return false;
